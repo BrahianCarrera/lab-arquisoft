@@ -10,7 +10,7 @@ interface DatePickerValueProps {
 }
 
 const DatePickerValue: React.FC<DatePickerValueProps> = ({ onDateChange }) => {
-  const [startDate, setStartDate] = React.useState<Dayjs | null>(dayjs(''));
+  const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
   const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
 
   React.useEffect(() => {

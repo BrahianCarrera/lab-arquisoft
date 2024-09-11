@@ -5,6 +5,7 @@ import DatePickerValue from "./components/DatePickerValue";
 import QueryType from "./components/QueryType";
 import axiosInstance from './Api/axiosConfig';
 
+
 interface Flight {
   origin: string;
   destination: string;
@@ -12,7 +13,7 @@ interface Flight {
 }
 
 export default function Home() {
-  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs('2022-04-17'));
+  const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [inputValue2, setInputValue2] = useState("");
@@ -48,6 +49,8 @@ export default function Home() {
   };
 
   const handleSearch = async () => {
+    setLoading(true);
+    setError(null);
     const params = new URLSearchParams({
       startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
       endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
@@ -59,7 +62,7 @@ export default function Home() {
     }
 
     if (inputValue3) {
-      params.append('price', inputValue3);
+      params.append('maxPrice', inputValue3);
     }
 
     try {
@@ -86,8 +89,11 @@ export default function Home() {
         onInputChange3={handleInputChange3}
       />
       <button onClick={handleSearch}>Search</button>
+      
       <div>
+      
         <h1>Results</h1>
+        
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {!loading && !error && (
