@@ -8,6 +8,7 @@ interface QueryTypeProps {
   onInputChange3: (value: string) => void;
   onInputChange4: (value: string) => void;
   onInputChange5: (value: string) => void;
+  onInputChange6: (value: string) => void;
 }
 
 const QueryType: React.FC<QueryTypeProps> = ({
@@ -15,13 +16,15 @@ const QueryType: React.FC<QueryTypeProps> = ({
   onInputChange2,
   onInputChange3,
   onInputChange4,
-  onInputChange5
+  onInputChange5,
+  onInputChange6
 }) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
   const [isChecked4, setIsChecked4] = useState(false);
   const [isChecked5, setIsChecked5] = useState(false);
+  const [isChecked6, setIsChecked6] = useState(false);
 
   const handleCheckboxChange = (index: number) => {
     switch (index) {
@@ -39,6 +42,9 @@ const QueryType: React.FC<QueryTypeProps> = ({
         break;
         case 5:
         setIsChecked5(!isChecked5);
+        break;
+        case 6:
+        setIsChecked6(!isChecked6);
         break;
       default:
         break;
@@ -93,7 +99,6 @@ const QueryType: React.FC<QueryTypeProps> = ({
 {isChecked3 && (
     <TextField
       type="text"
-      
       onChange={handleInputChange(onInputChange3)}
       placeholder="Enter Max Price"
     />
@@ -127,6 +132,18 @@ const QueryType: React.FC<QueryTypeProps> = ({
       placeholder="Enter Equipment"
     />
   )}
+
+  <FormControlLabel
+      control={<Checkbox checked={isChecked6} onChange={() => handleCheckboxChange(6)} />}
+      label="Filter by Passengers"
+    />
+    {isChecked6 && (
+      <TextField
+        type="text"
+        onChange={handleInputChange(onInputChange6)}
+        placeholder="Enter Passengers"
+      />
+    )}
       </Stack>
     </>
   );

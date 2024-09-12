@@ -2,10 +2,12 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress } from '@mui/material';
 
 interface Flight {
+  date: React.ReactNode;
+  passengers: number;
   origin: string;
   destination: string;
   price?: number;
-  equipment?: string;
+  equipment?: number;
   className?: string;
 }
 
@@ -31,9 +33,11 @@ const FlightTable: React.FC<FlightTableProps> = ({ flights, loading, error }) =>
           <TableRow>
             <TableCell>Origin</TableCell>
             <TableCell>Destination</TableCell>
+            <TableCell>Date</TableCell>
             <TableCell>Price</TableCell>
             <TableCell>Equipment</TableCell>
             <TableCell>Class</TableCell>
+            <TableCell>Max Passengers</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,9 +45,12 @@ const FlightTable: React.FC<FlightTableProps> = ({ flights, loading, error }) =>
             <TableRow key={index}>
               <TableCell>{flight.origin}</TableCell>
               <TableCell>{flight.destination}</TableCell>
+              <TableCell>{flight.date}</TableCell>
               <TableCell>{flight.price}</TableCell>
               <TableCell>{flight.equipment}</TableCell>
               <TableCell>{flight.className}</TableCell>
+              <TableCell>{flight.passengers}</TableCell>
+              
             </TableRow>
           ))}
         </TableBody>
